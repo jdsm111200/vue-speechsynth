@@ -66,7 +66,6 @@
               </template>
             </v-btn>
           </v-form>
-          {{ userAgent }}
         </v-col>
       </v-row>
     </v-container>
@@ -113,9 +112,14 @@ export default {
           //texto a ser sintetizado
           this.speak.text = this.text;
           // voz que usara la aplicacion
-          this.speak.voice = this.voices.find((voice) => {
+          const voice = this.voices.find((voice) => {
             return voice.lang === this.selectedVoice;
           });
+          //se establece la voz
+          this.speak.voice = voice;
+
+          //se establece el lenguaje para que no ocupe el lenguaje predeterminado del html root
+          this.speak.lang = voice.lang;
           /** Pitch
            * valor entre 0 y 2 inclusivos el valor por defecto es 1
            */
